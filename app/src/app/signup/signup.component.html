@@ -1,5 +1,6 @@
-<mat-card class="p-3">
-    <mat-card-header>
+<div class="pe-5 ps-5">
+<mat-card class="text-center">
+    <mat-card-header class="d-flex justify-content-center">
         <mat-card-title>
             <h3>SignUp</h3>
         </mat-card-title>
@@ -8,31 +9,45 @@
         <div>
             <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>
-              <input matInput type="email" placeholder="example@gmail.com" formControlName="email" [(ngModel)]="email" />
+              <input matInput type="email" placeholder="example@gmail.com" formControlName="email" [(ngModel)]="email"/>
+              <mat-error *ngIf="form['email']?.errors?.['required']">Please enter valid email.</mat-error>
+              <mat-error *ngIf="form['email']?.errors?.['minlength']">Minimal length is 4.</mat-error>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field appearance="fill">
               <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password" [(ngModel)]="password">
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" [(ngModel)]="password">
+              <mat-error *ngIf="form['password']?.errors?.['required']">Please enter a valid password.</mat-error>
+              <button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field appearance="fill">
               <mat-label>Password bestätigen</mat-label>
-              <input matInput type="password" formControlName="confirmPassword" [(ngModel)]="confirmPassword">
+              <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmPassword" [(ngModel)]="confirmPassword">
+              <mat-error *ngIf="form['confirmPassword']?.errors?.['required']">Please enter a valid password.</mat-error>
+              <mat-error *ngIf="form['confirmPassword']?.errors?.['passwordMismatch']">Passwords do not match.</mat-error>
+              <button mat-icon-button type="button" matSuffix (click)="hideConfirm = !hideConfirm" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hideConfirm">
+                <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              
             </mat-form-field>
         </div>
         <div>
             <mat-form-field appearance="fill">
               <mat-label>Firma</mat-label>
-              <input type="text" formControlName="company" [(ngModel)]="company" matInput readonly>
+              <input type="text" formControlName="company" [(ngModel)]="company" matInput>
             </mat-form-field>
         </div>
         <div>
             <mat-form-field appearance="fill">
-              <mat-label>Straße</mat-label>
-              <input type="text" formControlName="street" [(ngModel)]="street" matInput>
+              <mat-label>Adresse</mat-label>
+              <input type="text" formControlName="adress" [(ngModel)]="adress" matInput>
             </mat-form-field>
         </div>
         <div>
@@ -44,7 +59,8 @@
         <div>
             <mat-form-field appearance="fill">
               <mat-label>Postleitzahl</mat-label>
-              <input type="number" formControlName="zip" [(ngModel)]="zip" matInput>
+              <input formControlName="zip" [(ngModel)]="zip" matInput>
+              <mat-error *ngIf="form['zip']?.errors?.['pattern']">Only Numbers</mat-error>
             </mat-form-field>
         </div>
         <div class="d-flex justify-content-center">
@@ -52,3 +68,4 @@
         </div>
     </form>
 </mat-card>
+</div>
