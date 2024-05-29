@@ -1,1 +1,54 @@
-Hello from the signup component!
+<mat-card class="p-3">
+    <mat-card-header>
+        <mat-card-title>
+            <h3>SignUp</h3>
+        </mat-card-title>
+    </mat-card-header>
+    <form (ngSubmit)='register()' [formGroup]="signupForm">
+        <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" placeholder="example@gmail.com" formControlName="email" [(ngModel)]="email" />
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" formControlName="password" [(ngModel)]="password">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Password bestätigen</mat-label>
+              <input matInput type="password" formControlName="confirmPassword" [(ngModel)]="confirmPassword">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Firma</mat-label>
+              <input type="text" formControlName="company" [(ngModel)]="company" matInput readonly>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Straße</mat-label>
+              <input type="text" formControlName="street" [(ngModel)]="street" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Stadt</mat-label>
+              <input type="text" formControlName="city" [(ngModel)]="city" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Postleitzahl</mat-label>
+              <input type="number" formControlName="zip" [(ngModel)]="zip" matInput>
+            </mat-form-field>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button mat-button color="Primary" type="submit">Signup</button>
+        </div>
+    </form>
+</mat-card>
