@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
       }
     }
     else {
-      console.log('Form not valid!');
+      console.log('Form not valid!', this.loginForm.value);
     }
   }
 
