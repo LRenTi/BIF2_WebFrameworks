@@ -1,40 +1,19 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-xm-6">
-            <div class="card mt-5">
-                <div class="card-header text-center">
-                    <h3>Login</h3>
-                </div>
-                <div class="card-body">
-                    <form method="post">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" id="email" [(ngModel)]="email" required ngmodel email placeholder="Email eingeben" #emailInput="ngModel">
-                            <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="alert alert-danger mt-2">
-                                <div *ngIf="emailInput.errors?.['required']">Email ist erforderlich.</div>
-                                <div *ngIf="emailInput.errors?.['email']">Bitte geben Sie eine gültige Email-Adresse ein.</div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Passwort</label>
-                            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password" placeholder="Passwort eingeben" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="passwordConfirm" class="form-label">Passwort bestätigen</label>
-                            <input type="password" class="form-control" id="passwordConfirm" placeholder="Passwort bestätigen" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
-                    </form>
-                </div>
-                <div class="card-footer text-center">
-                    <div>
-                        <span>Email: {{ email }}</span>
-                      </div>
-                      <div>
-                        <span>Password: {{ password }}</span>
-                      </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="d-flex justify-content-center">
+    <form class="m-2 d-grid gap-1 justify-content-center" style="width: 25vw" (ngSubmit)='login()' [formGroup]="loginForm">
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your email</mat-label>
+        <input matInput type="email" placeholder="E-Mail" formControlName="email" [(ngModel)]="email" />
+        <mat-error *ngIf="form['email']?.errors?.['required']">Please enter valid email.</mat-error>
+        <mat-error *ngIf="form['email']?.errors?.['minlength']">Mininal length is 4.</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" />
+        <button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Login</button>
+    </form>
 </div>

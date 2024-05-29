@@ -5,16 +5,13 @@
             <h3>SignUp</h3>
         </mat-card-title>
     </mat-card-header>
-    <form (ngSubmit)='register()' [formGroup]="signupForm">
-        <div>
+    <form class="d-grid justify-content-center"(ngSubmit)='register()' [formGroup]="signupForm">
             <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>
               <input matInput type="email" placeholder="example@gmail.com" formControlName="email" [(ngModel)]="email"/>
               <mat-error *ngIf="form['email']?.errors?.['required']">Please enter valid email.</mat-error>
               <mat-error *ngIf="form['email']?.errors?.['minlength']">Minimal length is 4.</mat-error>
             </mat-form-field>
-        </div>
-        <div>
             <mat-form-field appearance="fill">
               <mat-label>Password</mat-label>
               <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" [(ngModel)]="password">
@@ -24,8 +21,6 @@
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>
-        </div>
-        <div>
             <mat-form-field appearance="fill">
               <mat-label>Password bestätigen</mat-label>
               <input matInput [type]="hideConfirm ? 'password' : 'text'" formControlName="confirmPassword" [(ngModel)]="confirmPassword">
@@ -37,34 +32,27 @@
               </button>
               
             </mat-form-field>
-        </div>
-        <div>
             <mat-form-field appearance="fill">
               <mat-label>Firma</mat-label>
               <input type="text" formControlName="company" [(ngModel)]="company" matInput>
             </mat-form-field>
-        </div>
-        <div>
             <mat-form-field appearance="fill">
               <mat-label>Adresse</mat-label>
-              <input type="text" formControlName="adress" [(ngModel)]="adress" matInput>
+              <textarea type="text" formControlName="adress" [(ngModel)]="adress" matInput></textarea>
             </mat-form-field>
-        </div>
-        <div>
             <mat-form-field appearance="fill">
               <mat-label>Stadt</mat-label>
               <input type="text" formControlName="city" [(ngModel)]="city" matInput>
             </mat-form-field>
-        </div>
-        <div>
+
             <mat-form-field appearance="fill">
               <mat-label>Postleitzahl</mat-label>
               <input formControlName="zip" [(ngModel)]="zip" matInput>
               <mat-error *ngIf="form['zip']?.errors?.['pattern']">Only Numbers</mat-error>
             </mat-form-field>
-        </div>
+
         <div class="d-flex justify-content-center">
-            <button mat-button color="Primary" type="submit">Signup</button>
+            <button mat-raised-button color="Primary" type="submit">Signup</button>
         </div>
     </form>
 </mat-card>
