@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl, FormBuilder, AbstractControl } from '@angular/forms';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-login',
@@ -22,21 +23,15 @@ export class LoginComponent implements OnInit {
     ])
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private backendService: BackendService) { }
 
   ngOnInit(): void { }
 
-  login() {
+  login(): void {
     if (this.loginForm.valid) {
-      if (this.loginForm.value.email === 'test@test.com' && this.loginForm.value.password === '12345678') {
-        console.log('Login successful!', this.loginForm.value);
-      }
-      else {
-        console.log('Login failed!', this.loginForm.value);
-      }
-    }
-    else {
-      console.log('Form not valid!', this.loginForm.value);
+      this.backendService.login(
+        this.email, 
+        this.password);
     }
   }
 
