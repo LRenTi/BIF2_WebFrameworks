@@ -1,17 +1,11 @@
 const express = require("express");
 const cors = require('cors');
 const db = require('./db'); // Importieren der db.js
+var randomToken = require('random-token');
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-let userData = {
-    "ich@du.at": "test",
-    "ich2@du.at": "test3"
-};
-
-let tokenData = {};
 
 app.use((req, res, next) => {
     console.log("First middleware");
@@ -20,8 +14,8 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => {
     // Alle Token Daten ausgeben
-    console.log(tokenData);
-    res.status(200).json(tokenData);
+    console.log(db.tokens);
+    res.status(200).json(db.tokens);
 });
 
 app.post("/login", (req, res) => {

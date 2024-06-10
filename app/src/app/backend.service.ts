@@ -18,4 +18,12 @@ export class BackendService {
         console.log(responseData.Token);
       });
   }
+
+  signup(email: string, password: string) {
+    this.http.post('http://localhost:3000/signup', { "email": email, "password": password }, this.httpOptions)
+      .subscribe((responseData) => {
+        console.log(responseData);
+      });
+  }
+
 }

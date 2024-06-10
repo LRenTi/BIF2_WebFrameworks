@@ -1,6 +1,7 @@
 import { EmptyExpr } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { Validators, FormGroup, FormControl, FormBuilder, AbstractControl } from '@angular/forms';
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +20,7 @@ adress: string = '';
 city: string = '';
 zip: string = '';
 
-constructor(private fb: FormBuilder) { }
+constructor(private fb: FormBuilder, private backendService: BackendService) { }
 
 ngOnInit(): void { }
 
@@ -49,6 +50,10 @@ signupForm: FormGroup = this.fb.group({
 
 register() {
   if (this.signupForm.valid) {
+    this.backendService.signup(
+      this.email,
+      this.password
+    );
     console.log('Form Submitted!', this.signupForm.value);
   }
   else {
