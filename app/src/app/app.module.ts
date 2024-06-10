@@ -16,12 +16,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 // @ts-ignore: Suppress deprecation warning if sure it's a false positive
 import { HttpClientModule } from '@angular/common/http';
+import { LandingPageComponent } from './landingpage/landingpage.component';
+import { HighscoresComponent } from './highscores/highscores.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LandingPageComponent,
+    HighscoresComponent
   ],
   imports: [
     AppRoutingModule,

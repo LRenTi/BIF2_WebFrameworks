@@ -8,7 +8,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log("First middleware");
     next();
 });
 
@@ -43,7 +42,39 @@ app.post("/signup", (req, res) => {
 
         res.status(201).json({ message: "User created successfully", Token: token });
     } else {
-        res.status(409).json({ message: "User already exists" });
+        res.status(409).json({ message: "User already exists!" });
+    }
+});
+
+app.get("/highscores", (req, res) => {
+    // Highscores ausgeben
+    res.status(200).json(db.highscores);
+});
+
+app.post("/highscores", (req, res) => {
+    const { token, score } = req.body;
+
+    // Überprüfen, ob der Token existiert
+    const user = db.tokens.find((user) => user.token === token);
+    if (user) {
+        // Highscore hinzufügen
+        db.highscores.push({ username: user.username, score });
+        res.status(201).json({ message: "Highscore added successfully" });
+    } else {
+        res.status(401).json({ message: "Invalid token" });
+    }
+});
+
+app.post("/logout", (req, res) => {
+    const { token } = req.body;
+
+    // Token löschen
+    const index = db.tokens.findIndex((user) => user.token === token);
+    if (index !== -1) {
+        db.tokens.splice(index, 1);
+        res.status(200).json({ message: "Successfully logged out" });
+    } else {
+        res.status(401).json({ message: "Invalid token" });
     }
 });
 
