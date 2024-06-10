@@ -21,6 +21,9 @@ export class LandingPageComponent {
   }
 
   addHighscore() {
+    const score = Math.floor(Math.random() * 2000);
+    this.backendService.addHighscore(score);
+    console.log('Highscore added: ' + score);
   }
 
   viewHighscores() {

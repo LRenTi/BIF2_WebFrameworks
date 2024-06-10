@@ -47,31 +47,31 @@ app.post("/signup", (req, res) => {
 });
 
 app.get("/highscores", (req, res) => {
-    // Highscores ausgeben
-    res.status(200).json(db.highscores);
+
+    const highscores = db.highscores.sort((a, b) => b.score - a.score);
+    res.status(200).json(highscores);
 });
 
 app.post("/highscores", (req, res) => {
-    const { token, score } = req.body;
+    // Token aus dem Header holen
+    const token = req.headers.authorization;
 
-    // Überprüfen, ob der Token existiert
-    const user = db.tokens.find((user) => user.token === token);
-    if (user) {
-        // Highscore hinzufügen
-        db.highscores.push({ username: user.username, score });
-        res.status(201).json({ message: "Highscore added successfully" });
+    if (db.isAuthenticated(token)) {
+        const user = db.getAuthUser(token);
+        const { score } = req.body;
+        db.addHighscore(user.username, score);
+        res.status(201).json({ message: "Score added successfully" });
     } else {
         res.status(401).json({ message: "Invalid token" });
     }
 });
 
 app.post("/logout", (req, res) => {
-    const { token } = req.body;
+    const token = req.headers.authorization;
+    console.log("Logout Token: " + token);
 
-    // Token löschen
-    const index = db.tokens.findIndex((user) => user.token === token);
-    if (index !== -1) {
-        db.tokens.splice(index, 1);
+    if (db.isAuthenticated(token)) {
+        db.deleteToken(token);
         res.status(200).json({ message: "Successfully logged out" });
     } else {
         res.status(401).json({ message: "Invalid token" });

@@ -10,4 +10,15 @@ import { BackendService } from '../backend.service';
 
 export class HighscoresComponent {
 
+  highscores: { username: string, score: number }[] = [];
+
+  constructor(private backendService: BackendService) { }
+
+  ngOnInit(): void {
+    // Highscores beim Initialisieren der Komponente abrufen
+    this.backendService.getHighscores().subscribe((highscores) => {
+      this.highscores = highscores;
+    }
+    );
+  }
 }

@@ -5,6 +5,7 @@
             <h3>SignUp</h3>
         </mat-card-title>
     </mat-card-header>
+        <h4> {{ message }} </h4>
     <form class="d-grid justify-content-center"(ngSubmit)='register()' [formGroup]="signupForm">
             <mat-form-field appearance="fill">
               <mat-label>Email</mat-label>

@@ -12,6 +12,7 @@ export class SignupComponent {
 email: string = '';
 hide = true;
 hideConfirm = true;
+message: string = '';
 
 password: string = '';
 confirmPassword: string = '';
@@ -55,9 +56,11 @@ register() {
       this.password
     );
     console.log('Form Submitted!', this.signupForm.value);
+
   }
   else {
     console.log('Form not valid!');
+    this.message = 'Form not valid!';
   }
 }
 

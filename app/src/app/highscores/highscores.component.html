@@ -1,7 +1,22 @@
-<div class="highscores">
-    <h1>Highscores</h1>
-    <ul>
-        list
-    </ul>
+<div class="d-flex justify-content-center">
+    <div>
+    <h2>Highscores</h2>
+        <table>
+        <thead>
+            <tr>
+            <th>Platz</th>
+            <th>Username</th>
+            <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let highscore of highscores; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ highscore.username }}</td>
+            <td>{{ highscore.score }}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
   </div>
   

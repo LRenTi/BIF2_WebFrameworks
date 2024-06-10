@@ -15,9 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 // @ts-ignore: Suppress deprecation warning if sure it's a false positive
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { LandingPageComponent } from './landingpage/landingpage.component';
 import { HighscoresComponent } from './highscores/highscores.component';
+import { withFetch } from '@angular/common/http';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { HighscoresComponent } from './highscores/highscores.component';
     HttpClientModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })
